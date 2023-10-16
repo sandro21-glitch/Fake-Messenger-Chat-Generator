@@ -6,6 +6,10 @@ export default {
       colors: {
         teal: "#085f63",
       },
+      fontSize: {
+        heading: "14px",
+        labels: "12px",
+      },
     },
   },
   plugins: [],
