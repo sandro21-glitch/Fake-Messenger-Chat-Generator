@@ -96,3 +96,14 @@ hr {
   max-width: 1070px;
   margin: 0 auto;
 }
+.left-panel {
+  width: 100%;
+  min-width: 300px;
+}
+
+.modal-width {
+  width: 360px;
+}
+textarea {
+  resize: none;
+}
