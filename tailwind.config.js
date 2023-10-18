@@ -10,7 +10,7 @@ export default {
         fbLightBlue: "#1da1f2",
       },
       fontSize: {
-        heading: "13px",
+        heading: "11px",
         labels: "11px",
         icons: "13px",
       },
