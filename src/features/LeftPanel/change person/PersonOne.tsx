@@ -1,7 +1,20 @@
+import { useState } from "react";
 import AddMessageBtn from "../../../ui/AddMessageBtn";
 import profile from "/profile.png";
 
 const PersonOne = () => {
+  const [profileImage, setProfileImage] = useState<string>(profile);
+
+  //handle the event when a user uploads an image file.
+  const handleImageUpload = (e: React.FormEvent<EventTarget>): void => {
+    const inputElement = e.target as HTMLInputElement;
+    const file = inputElement?.files?.[0];
+
+    if (file) {
+      setProfileImage(URL.createObjectURL(file));
+    }
+  };
+
   return (
     <div className="border border-gray-300 px-2">
       {/* profile photo upload */}
@@ -9,7 +22,7 @@ const PersonOne = () => {
         <div className="w-1/2 flex  justify-center">
           <div className="border p-1 rounded-sm w-[50px]">
             <img
-              src={profile}
+              src={profileImage}
               alt="profile"
               className="w-full h-full rounded-sm"
             />
@@ -23,7 +36,14 @@ const PersonOne = () => {
           >
             Select Image
           </label>
-          <input type="file" name="uploadfile" id="img" className="hidden" />
+          <input
+            type="file"
+            name="uploadfile"
+            id="img"
+            accept="image/*"
+            className="hidden"
+            onChange={handleImageUpload}
+          />
         </div>
       </div>
       <div className="">
