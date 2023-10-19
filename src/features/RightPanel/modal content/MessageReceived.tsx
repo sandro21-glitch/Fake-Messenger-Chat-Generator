@@ -1,8 +1,10 @@
 import profile from "/profile.png";
-
-const MessageReceived = () => {
+type MessageType = {
+  message: string;
+};
+const MessageReceived = ({ message }: MessageType) => {
   return (
-    <div className="flex justify-start py-2">
+    <div className="flex justify-start pt-[.75rem]">
       <div className="flex items-center gap-2">
         <img
           src={profile}
@@ -11,9 +13,9 @@ const MessageReceived = () => {
         />
         <div
           className="text-labels bg-[#e6ecf0] text-[#14171a]
-           rounded-[20px] py-[6px] px-[10px] w-fit max-w-[240px] min-h-[30px] break-words"
+           rounded-[20px] py-[6px] px-[10px] w-fit max-w-[240px] min-h-[30px] break-words fade-in-text"
         >
-          როგორ ხარ?
+          {message}
         </div>
       </div>
     </div>
