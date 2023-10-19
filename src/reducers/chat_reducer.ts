@@ -1,5 +1,14 @@
 import StateTypes from "../types/StateTypes";
-import { TOGGLE_CHECKBOX, TOGGLE_LAYOUT } from "../actions/actions";
+import {
+  BATTERY_VALUE,
+  TOGGLE_CHECKBOX,
+  TOGGLE_LAYOUT,
+  UPDATE_CLOCK,
+  UPDATE_NAME,
+  PERSON_ONE_MESSAGE,
+  PERSON_TWO_MESSAGE,
+  UPDATE_IMAGE,
+} from "../actions/actions";
 
 // action types
 type Action =
@@ -14,6 +23,22 @@ type Action =
         hideHeader: boolean;
         hideFooter: boolean;
       };
+    }
+  | {
+      type: typeof BATTERY_VALUE;
+      payload: number;
+    }
+  | {
+      type: typeof UPDATE_CLOCK;
+      payload: string;
+    }
+  | {
+      type: typeof UPDATE_NAME;
+      payload: string;
+    }
+  | {
+      type: typeof UPDATE_IMAGE;
+      payload: string;
     };
 
 //reducer
@@ -34,6 +59,47 @@ export const chat_reducer = (state: StateTypes, action: Action) => {
   }
   if (action.type === TOGGLE_LAYOUT) {
     return { ...state, layout: action.payload as string };
+  }
+  if (action.type === BATTERY_VALUE) {
+    return { ...state, battery: action.payload as number };
+  }
+  if (action.type === UPDATE_CLOCK) {
+    return { ...state, clock: action.payload as string };
+  }
+  if (action.type === UPDATE_NAME) {
+    return { ...state, name: action.payload as string };
+  }
+  if (action.type === PERSON_ONE_MESSAGE) {
+    const newMessage = action.payload as string;
+    const updatedPersonOne = [...state.personOne, newMessage];
+    const updatedAllMessages = [
+      ...state.allMessages,
+      { from: "PersonOne", text: newMessage },
+    ];
+
+    return {
+      ...state,
+      personOne: updatedPersonOne,
+      allMessages: updatedAllMessages,
+    };
+  }
+
+  if (action.type === PERSON_TWO_MESSAGE) {
+    const newMessage = action.payload as string;
+    const updatedPersonTwo = [...state.personTwo, newMessage];
+    const updatedAllMessages = [
+      ...state.allMessages,
+      { from: "PersonTwo", text: newMessage },
+    ];
+
+    return {
+      ...state,
+      personTwo: updatedPersonTwo,
+      allMessages: updatedAllMessages,
+    };
+  }
+  if (action.type === UPDATE_IMAGE) {
+    return { ...state, img: action.payload as string };
   }
   return state;
 };
