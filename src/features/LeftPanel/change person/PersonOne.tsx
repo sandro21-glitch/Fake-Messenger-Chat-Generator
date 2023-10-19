@@ -1,26 +1,33 @@
-import { useState } from "react";
-import AddMessageBtn from "../../../ui/AddMessageBtn";
+import { useState, useEffect } from "react";
 import profile from "/profile.png";
-
+import PersonOneForm from "./PersonOneForm";
+import { useChatContext } from "../../../context/ChatContext";
 const PersonOne = () => {
-  const [profileImage, setProfileImage] = useState<string>(profile);
-
+  const { updatePersonImage } = useChatContext();
+  const [profileImage, setProfileImage] = useState<string>(
+    () => localStorage.getItem("image") || profile
+  );
   //handle the event when a user uploads an image file.
   const handleImageUpload = (e: React.FormEvent<EventTarget>): void => {
     const inputElement = e.target as HTMLInputElement;
     const file = inputElement?.files?.[0];
 
     if (file) {
-      setProfileImage(URL.createObjectURL(file));
+      const imageUrl = URL.createObjectURL(file);
+      setProfileImage(imageUrl);
+      localStorage.setItem("image", imageUrl);
     }
   };
+  useEffect(() => {
+    updatePersonImage(profileImage);
+  }, [profileImage]);
 
   return (
     <div className="border border-gray-300 px-2">
       {/* profile photo upload */}
       <div className="p-5 flex  items-center">
         <div className="w-1/2 flex  justify-center">
-          <div className="border p-1 rounded-sm w-[50px]">
+          <div className="border p-1 rounded-sm w-[50px] h-[50px]">
             <img
               src={profileImage}
               alt="profile"
@@ -46,17 +53,7 @@ const PersonOne = () => {
           />
         </div>
       </div>
-      <div className="">
-        <label htmlFor="message" className="text-labels font-semibold">
-          Message
-        </label>
-        <textarea
-          name="message"
-          id="message"
-          className="w-full min-h-[100px] text-labels outline-none rounded-md border border-gray-300 p-2"
-        ></textarea>
-      </div>
-      <AddMessageBtn />
+      <PersonOneForm />
     </div>
   );
 };
