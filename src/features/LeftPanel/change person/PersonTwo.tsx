@@ -1,18 +1,10 @@
 import TextHeading from "../../../ui/TextHeading";
+import PersonTwoForm from "./PersonTwoForm";
 
 const PersonTwo = () => {
   return (
     <div className="border border-gray-300 px-2">
-      <div className="py-2">
-        <label htmlFor="message" className="text-labels font-semibold">
-          Message
-        </label>
-        <textarea
-          name=""
-          id="message"
-          className="w-full min-h-[100px] text-labels outline-none rounded-md border border-gray-300 p-2"
-        ></textarea>
-      </div>
+      <PersonTwoForm />
       {/* message status */}
       <div className="">
         <TextHeading text="Message Status :" />
