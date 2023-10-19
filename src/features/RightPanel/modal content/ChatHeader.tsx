@@ -8,23 +8,27 @@ const ChatHeader = ({ activeView }: ViewTypes) => {
   const { state } = useChatContext();
   const {
     parts: { activeNow },
+    name,
+    img,
   } = state;
   return (
     <div className=" w-full h-[70px] bg-white p-4 flex items-center relative z-[9999] shadow-shadowBottom">
-      {/* left content */}
+      {/* left side */}
       <div className="flex items-center w-[60%]">
         <div className="mr-4">
           <img src={FbArrow} alt="fb-arrow" className="w-[22px] h-full" />
         </div>
         <div className="mr-2">
           <img
-            src={profile}
+            src={img === "" ? profile : img}
             alt="profile"
-            className="w-[35px] h-[35px] rounded-full"
+            className="w-[40px] h-[40px] rounded-full"
           />
         </div>
         <div>
-          <span className="text-[#14171a] text-labels">Sandro Papidze</span>
+          <span className="text-[#14171a] text-labels whitespace-nowrap">
+            {name.length > 20 ? `${name.substring(0, 18)}...` : name}
+          </span>
         </div>
       </div>
       {/* right side */}
