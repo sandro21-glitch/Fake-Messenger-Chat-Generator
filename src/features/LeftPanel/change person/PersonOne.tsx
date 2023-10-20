@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import profile from "/profile.png";
 import PersonOneForm from "./PersonOneForm";
 import { useChatContext } from "../../../context/ChatContext";
 const PersonOne = () => {
