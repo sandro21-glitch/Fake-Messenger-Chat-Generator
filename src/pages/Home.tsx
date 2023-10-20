@@ -1,7 +1,6 @@
 import { useState } from "react";
 import LeftPanel from "../features/LeftPanel/LeftPanel";
 import RightPanel from "../features/RightPanel/RightPanel";
-import DownloadBtn from "../ui/DownloadBtn";
 
 const Home = () => {
   const [activeView, setActiveView] = useState<string>("mobile");
