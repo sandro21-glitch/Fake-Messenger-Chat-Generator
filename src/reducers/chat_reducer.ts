@@ -8,6 +8,7 @@ import {
   PERSON_ONE_MESSAGE,
   PERSON_TWO_MESSAGE,
   UPDATE_IMAGE,
+  UPDATE_STATUS,
 } from "../actions/actions";
 
 // action types
@@ -38,6 +39,10 @@ type Action =
     }
   | {
       type: typeof UPDATE_IMAGE;
+      payload: string;
+    }
+  | {
+      type: typeof UPDATE_STATUS;
       payload: string;
     };
 
@@ -100,6 +105,31 @@ export const chat_reducer = (state: StateTypes, action: Action) => {
   }
   if (action.type === UPDATE_IMAGE) {
     return { ...state, img: action.payload as string };
+  }
+  if (action.type === UPDATE_STATUS) {
+    const updatedStatus = { sent: false, delivered: false, seen: false };
+
+    switch (action.payload) {
+      case "sent":
+        updatedStatus.sent = true;
+        break;
+      case "delivered":
+        updatedStatus.delivered = true;
+        break;
+      case "seen":
+        updatedStatus.seen = true;
+        break;
+      default:
+        break;
+    }
+
+    return {
+      ...state,
+      status: {
+        ...state.status,
+        ...updatedStatus,
+      },
+    };
   }
   return state;
 };
