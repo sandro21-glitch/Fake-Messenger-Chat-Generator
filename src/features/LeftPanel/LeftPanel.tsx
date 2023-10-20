@@ -13,7 +13,7 @@ const LeftPanel = ({ activeView }: ViewTypes) => {
         <Parts activeView={activeView} />
         <Layout />
       </div>
-      <div className="flex gap-5 mb-5">
+      <div className="flex flex-col md:flex-row gap-5 mb-5">
         <Clock />
         <Battery />
       </div>
