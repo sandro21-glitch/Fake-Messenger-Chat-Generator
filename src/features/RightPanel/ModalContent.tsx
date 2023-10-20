@@ -3,7 +3,6 @@ import ChatBody from "./modal content/ChatBody";
 import ChatFooter from "./modal content/ChatFooter";
 import ChatHeader from "./modal content/ChatHeader";
 import ModalHeader from "./modal content/ModalHeader";
-
 const ModalContent = ({ activeView }: ViewTypes) => {
   return (
     <div
