@@ -5,7 +5,7 @@ import { useChatContext } from "../../../context/ChatContext";
 const PersonOne = () => {
   const { updatePersonImage } = useChatContext();
   const [profileImage, setProfileImage] = useState<string>(
-    () => localStorage.getItem("image") || profile
+    () => localStorage.getItem("image") || "/profile.png"
   );
   //handle the event when a user uploads an image file.
   const handleImageUpload = (e: React.FormEvent<EventTarget>): void => {
