@@ -8,12 +8,11 @@ const Clock = () => {
     updateClockValue(clock);
   }, [clock]);
   return (
-    <div className="w-1/2">
+    <div className="w-full md:w-1/2">
       <TextHeading text="clock" />
       <div>
         <input
           type="text"
-          placeholder="10:04 am"
           className="border outline-none p-1 w-full rounded-md h-[30px] text-labels"
           value={clock}
           onChange={(e) => setClock(e.target.value)}
