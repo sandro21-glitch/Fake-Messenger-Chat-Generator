@@ -15,7 +15,7 @@ const Battery = () => {
     updateBatteryValue(batteryValue);
   }, [batteryValue]);
   return (
-    <div className="w-1/2">
+    <div className="w-full md:w-1/2">
       <TextHeading text="battery" />
       <div>
         <input
