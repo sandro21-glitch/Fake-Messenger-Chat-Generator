@@ -1,21 +1,24 @@
+import { useChatContext } from "../../../context/ChatContext";
 import profile from "/profile.png";
 type MessageType = {
   message: string;
 };
 const MessageReceived = ({ message }: MessageType) => {
+  const { state } = useChatContext();
+  const { img } = state;
   return (
     <div className="flex justify-start pt-[.75rem]">
-      <div className="flex items-center gap-2">
+      <div className="flex items-end gap-2">
         <img
-          src={profile}
+          src={img ? img : profile}
           alt="profile"
-          className="w-[28px] h-[28px] rounded-full object-cover"
+          className="w-[28px] h-[28px] rounded-full object-cover "
         />
         <div
-          className="text-labels bg-[#e6ecf0] text-[#14171a]
+          className="flex items-center text-labels bg-[#e6ecf0] text-[#14171a]
            rounded-[20px] py-[6px] px-[10px] w-fit max-w-[240px] min-h-[30px] break-words fade-in-text"
         >
-          {message}
+          <span>{message}</span>
         </div>
       </div>
     </div>
