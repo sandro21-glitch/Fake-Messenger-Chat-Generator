@@ -7,7 +7,7 @@ const LiveBox = ({ activeView }: ViewTypes) => {
       <div className="bg-white inline-block px-4 py-2 rounded-md text-heading font-medium mb-7">
         Live preview
       </div>
-      <div className="flex justify-center">
+      <div className="flex justify-center" id="modal-content">
         <ModalContent activeView={activeView} />
       </div>
     </div>
