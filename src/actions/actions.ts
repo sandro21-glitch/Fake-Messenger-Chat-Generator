@@ -6,3 +6,4 @@ export const UPDATE_NAME: string = "UPDATE_NAME";
 export const PERSON_ONE_MESSAGE: string = "PERSON_ONE_MESSAGE";
 export const PERSON_TWO_MESSAGE: string = "PERSON_TWO_MESSAGE";
 export const UPDATE_IMAGE: string = "UPDATE_IMAGE";
+export const UPDATE_STATUS: string = "UPDATE_STATUS";
