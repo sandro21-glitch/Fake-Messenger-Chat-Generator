@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { AiOutlineWifi } from "react-icons/ai";
 import { GiNetworkBars } from "react-icons/gi";
 import { ViewTypes } from "../../../types/ViewTypes";
@@ -15,11 +14,11 @@ const ModalHeader = ({ activeView }: ViewTypes) => {
   if (activeView === "desktop") return null;
   if (hideHeader) return null;
   return (
-    <div className="px-[5px] py-[1px]">
+    <div className="">
       <ul
         className={`flex items-center ${
           layout === "android" ? "justify-end" : "justify-between"
-        }  gap-1 bg-modalHeader`}
+        }  gap-1 bg-modalHeader px-[5px] py-[1px]`}
       >
         {layout === "android" ? (
           <li>
@@ -43,7 +42,9 @@ const ModalHeader = ({ activeView }: ViewTypes) => {
           </li>
         ) : null}
 
-        <li className="text-icons font-medium">{clock}</li>
+        <li className="text-icons font-medium">
+          {layout === "android" ? clock : clock.replace("am", "")}
+        </li>
         <li className="flex items-center">
           <span className="text-icons font-medium mr-2">{battery}%</span>
           <div
