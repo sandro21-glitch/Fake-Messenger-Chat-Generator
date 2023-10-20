@@ -1,11 +1,16 @@
 type StateTypes = {
-  allMessages: { from: string; text: string}[];
+  allMessages: { from: string; text: string }[];
   personOne: string[];
   personTwo: string[];
   parts: {
     activeNow: boolean;
     hideHeader: boolean;
     hideFooter: boolean;
+  };
+  status: {
+    sent: boolean;
+    delivered: boolean;
+    seen: boolean;
   };
   layout: string;
   battery: number;
