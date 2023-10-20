@@ -1,13 +1,14 @@
 import { useState } from "react";
 import LeftPanel from "../features/LeftPanel/LeftPanel";
 import RightPanel from "../features/RightPanel/RightPanel";
+import DownloadBtn from "../ui/DownloadBtn";
 
 const Home = () => {
   const [activeView, setActiveView] = useState<string>("mobile");
 
   return (
     <section className="section-center px-4 py-20">
-      <article className="flex gap-5">
+      <article className="flex gap-5 flex-col md:flex-row">
         <LeftPanel activeView={activeView} />
         <RightPanel activeView={activeView} setActiveView={setActiveView} />
       </article>
