@@ -3,7 +3,7 @@ import { chat_reducer } from "../reducers/chat_reducer";
 import StateTypes from "../types/StateTypes";
 const getLocalStorage = (): string => {
   const storedImage = localStorage.getItem("image");
-  return storedImage || ""; // Return an empty string if the value is not found
+  return storedImage || "/profile.png"; // return default image if the value is not found
 };
 import {
   BATTERY_VALUE,
@@ -14,6 +14,7 @@ import {
   UPDATE_CLOCK,
   UPDATE_NAME,
   UPDATE_IMAGE,
+  UPDATE_STATUS,
 } from "../actions/actions";
 type ChatContextType = {
   state: StateTypes;
@@ -30,20 +31,23 @@ type ChatContextType = {
   addPersonOneMessage: (message: string) => void;
   addPersonTwoMessage: (message: string) => void;
   updatePersonImage: (imagePath: string) => void;
+  updateActiveStatus: (status: string) => void;
 };
 const ChatProvider = createContext<ChatContextType | null>(null);
 
 const initialState: StateTypes = {
-  allMessages: [
-    { from: "PersonOne", text: "Hi 👋" },
-    { from: "PersonTwo", text: "Hi" },
-  ],
+  allMessages: [],
   personOne: [],
   personTwo: [],
   parts: {
     activeNow: true,
     hideHeader: false,
     hideFooter: false,
+  },
+  status: {
+    sent: true,
+    delivered: false,
+    seen: false,
   },
   layout: "android",
   battery: 50,
@@ -82,6 +86,9 @@ const ChatContext: React.FC<{ children: ReactNode }> = ({ children }) => {
   const updatePersonImage = (imagePath: string): void => {
     dispatch({ type: UPDATE_IMAGE, payload: imagePath });
   };
+  const updateActiveStatus = (value: string): void => {
+    dispatch({ type: UPDATE_STATUS, payload: value });
+  };
 
   return (
     <ChatProvider.Provider
@@ -96,6 +103,7 @@ const ChatContext: React.FC<{ children: ReactNode }> = ({ children }) => {
         addPersonOneMessage,
         addPersonTwoMessage,
         updatePersonImage,
+        updateActiveStatus,
       }}
     >
       {children}
