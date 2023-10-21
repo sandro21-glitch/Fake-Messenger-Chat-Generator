@@ -10,7 +10,11 @@ const MessageReceived = ({ message }: MessageType) => {
     <div className="flex justify-start pt-[.75rem]">
       <div className="flex items-end gap-2">
         <img
-          src={img ? img : profile}
+          src={
+            img === ""
+              ? `data:image/png;base64,${img}`
+              : `data:image/png;base64,${profile}`
+          }
           alt="profile"
           className="w-[28px] h-[28px] rounded-full object-cover "
         />
