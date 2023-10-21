@@ -1,6 +1,6 @@
-import * as htmlToImage from "html-to-image";
 import { useState } from "react";
 import { FaDownload } from "react-icons/fa";
+import html2canvas from "html2canvas";
 
 const DownloadButton = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -8,14 +8,13 @@ const DownloadButton = () => {
   const handleDownload = async () => {
     setIsLoading(true); // Set loading state
 
-    // Preload images and wait for them to load
-    await preloadImages();
-
     const element = document.getElementById("modal-content");
+
     if (element) {
-      htmlToImage
-        .toPng(element)
-        .then(function (dataUrl) {
+      html2canvas(element)
+        .then(function (canvas) {
+          const dataUrl = canvas.toDataURL("image/png");
+
           const a = document.createElement("a");
           a.href = dataUrl;
           a.download = "modal_content.png";
@@ -23,42 +22,17 @@ const DownloadButton = () => {
           document.body.appendChild(a);
           a.click();
           document.body.removeChild(a);
-          setIsLoading(false);
         })
         .catch(function (error) {
           console.error("Error capturing image: ", error);
+        })
+        .finally(function () {
           setIsLoading(false);
         });
     }
   };
-  const preloadImages = () => {
-    return new Promise<void>(async (resolve, reject) => {
-      try {
-        const images = document.querySelectorAll("#modal-content img");
-        const imagePromises: Promise<void>[] = [];
-  
-        images.forEach((img) => {
-          const image = new Image();
-          // Use data-src if available, fallback to src
-          const src = (img as HTMLImageElement).getAttribute("data-src") || (img as HTMLImageElement).src;
-          image.src = src;
-          imagePromises.push(
-            new Promise<void>((imageResolve) => {
-              image.onload = () => imageResolve();
-              image.onerror = () => imageResolve();
-            })
-          );
-        });
-  
-        await Promise.all(imagePromises);
-        resolve();
-      } catch (error) {
-        reject(error);
-      }
-    });
-  };
 
-  if (isLoading) return <p>Loading...f</p>;
+  if (isLoading) return <p>Loading...</p>;
 
   return (
     <div className="w-full flex items-center justify-center">
