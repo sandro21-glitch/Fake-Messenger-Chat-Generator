@@ -35,6 +35,7 @@ const DownloadButton = () => {
     return new Promise<void>(async (resolve, reject) => {
       try {
         const images = document.querySelectorAll("#modal-content img");
+        console.log(images)
         const imagePromises: Promise<void>[] = [];
 
         images.forEach((img) => {
@@ -50,6 +51,7 @@ const DownloadButton = () => {
 
         await Promise.all(imagePromises);
         resolve();
+        console.log(images)
       } catch (error) {
         reject(error);
       }
