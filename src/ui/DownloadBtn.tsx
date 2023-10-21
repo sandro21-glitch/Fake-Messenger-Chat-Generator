@@ -1,7 +1,24 @@
 import * as htmlToImage from "html-to-image";
+import { useState } from "react";
 import { FaDownload } from "react-icons/fa";
 const DownloadButton = () => {
-  const handleDownload = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const preloadImages = async () => {
+    const images = document.querySelectorAll("#modal-content img");
+    const imagePromises = Array.from(images).map((img) => {
+      return new Promise((resolve) => {
+        const image = img as HTMLImageElement;
+        image.onload = resolve;
+      });
+    });
+    await Promise.all(imagePromises);
+  };
+
+  const handleDownload = async () => {
+    setIsLoading(true); // Set loading state
+
+    // Preload images
+    await preloadImages();
     const element = document.getElementById("modal-content");
     if (element) {
       htmlToImage
@@ -14,13 +31,15 @@ const DownloadButton = () => {
           document.body.appendChild(a);
           a.click();
           document.body.removeChild(a);
+          setIsLoading(false); 
         })
         .catch(function (error) {
           console.error("Error capturing image: ", error);
+          setIsLoading(false); 
         });
     }
   };
-
+  if(isLoading) return <p>Loading...</p>
   return (
     <div className="w-full flex items-center justify-center">
       <button
