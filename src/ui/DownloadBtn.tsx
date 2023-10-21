@@ -31,19 +31,32 @@ const DownloadButton = () => {
         });
     }
   };
+  const preloadImages = () => {
+    return new Promise<void>(async (resolve, reject) => {
+      try {
+        const images = document.querySelectorAll("#modal-content img");
+        const imagePromises: Promise<void>[] = [];
 
-  const preloadImages = async () => {
-    const images = document.querySelectorAll("#modal-content #test");
-    const imagePromises = Array.from(images).map((img) => {
-      return new Promise((resolve) => {
-        const image = img as HTMLImageElement;
-        image.onload = resolve;
-      });
+        images.forEach((img) => {
+          const image = new Image();
+          image.src = (img as HTMLImageElement).src;
+          imagePromises.push(
+            new Promise<void>((imageResolve) => {
+              image.onload = () => imageResolve();
+              image.onerror = () => imageResolve();
+            })
+          );
+        });
+
+        await Promise.all(imagePromises);
+        resolve();
+      } catch (error) {
+        reject(error);
+      }
     });
-    await Promise.all(imagePromises);
   };
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <p>Loading...testtttt</p>;
 
   return (
     <div className="w-full flex items-center justify-center">
