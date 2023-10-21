@@ -20,7 +20,7 @@ const ChatHeader = ({ activeView }: ViewTypes) => {
         </div>
         <div className="mr-2">
           <img
-            src={img === "" ?`data:image/png;base64,${profile}`  : `data:image/png;base64,${img}`}
+            src={img === "" ? profile : img}
             alt="profile"
             className="w-[40px] h-[40px] rounded-full"
           />

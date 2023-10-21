@@ -35,12 +35,13 @@ const DownloadButton = () => {
     return new Promise<void>(async (resolve, reject) => {
       try {
         const images = document.querySelectorAll("#modal-content img");
-        console.log(images)
         const imagePromises: Promise<void>[] = [];
-
+  
         images.forEach((img) => {
           const image = new Image();
-          image.src = (img as HTMLImageElement).src;
+          // Use data-src if available, fallback to src
+          const src = (img as HTMLImageElement).getAttribute("data-src") || (img as HTMLImageElement).src;
+          image.src = src;
           imagePromises.push(
             new Promise<void>((imageResolve) => {
               image.onload = () => imageResolve();
@@ -48,10 +49,9 @@ const DownloadButton = () => {
             })
           );
         });
-
+  
         await Promise.all(imagePromises);
         resolve();
-        console.log(images)
       } catch (error) {
         reject(error);
       }
