@@ -6,6 +6,7 @@ import ModalHeader from "./modal content/ModalHeader";
 const ModalContent = ({ activeView }: ViewTypes) => {
   return (
     <div
+      id="modal-content"
       className={` ${
         activeView === "tablet"
           ? "w-[400px]"
