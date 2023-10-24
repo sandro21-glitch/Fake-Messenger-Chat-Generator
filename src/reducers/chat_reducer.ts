@@ -1,4 +1,5 @@
 import StateTypes from "../types/StateTypes";
+import { Action } from "../types/ActionTypes";
 import {
   BATTERY_VALUE,
   TOGGLE_CHECKBOX,
@@ -11,40 +12,7 @@ import {
   UPDATE_STATUS,
 } from "../actions/actions";
 
-// action types
-type Action =
-  | {
-      type: typeof TOGGLE_LAYOUT;
-      payload: string;
-    }
-  | {
-      type: typeof TOGGLE_CHECKBOX;
-      payload: {
-        activeNow: boolean;
-        hideHeader: boolean;
-        hideFooter: boolean;
-      };
-    }
-  | {
-      type: typeof BATTERY_VALUE;
-      payload: number;
-    }
-  | {
-      type: typeof UPDATE_CLOCK;
-      payload: string;
-    }
-  | {
-      type: typeof UPDATE_NAME;
-      payload: string;
-    }
-  | {
-      type: typeof UPDATE_IMAGE;
-      payload: string;
-    }
-  | {
-      type: typeof UPDATE_STATUS;
-      payload: string;
-    };
+
 
 //reducer
 export const chat_reducer = (state: StateTypes, action: Action) => {
