@@ -41,7 +41,7 @@ const DownloadButton = () => {
   if (isLoading) return <p>Loading...</p>;
 
   return (
-    <div className="w-full flex items-center justify-center hidden">
+    <div className="w-full items-center justify-center hidden">
       <button
         className="px-2 py-1 text-white border border-transparent
        hover:border-teal hover:text-teal hover-bg-transparent
