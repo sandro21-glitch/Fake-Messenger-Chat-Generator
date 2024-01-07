@@ -25,7 +25,7 @@ const MessageSent = ({ message, index }: MessageType) => {
     <div className="flex justify-end w-full relative pt-[.75rem]">
       <div
         className="text-labels bg-fbBlue text-white border border-fbLightBlue
-     rounded-[20px] py-[6px] px-[10px] w-fit max-w-[240px] min-h-[30px] break-words fade-in-text "
+        rounded-[20px] py-[6px] px-[10px] w-fit max-w-[240px] min-h-[30px] break-words fade-in-text"
       >
         <span>{message}</span>
       </div>

@@ -15,7 +15,7 @@ const MessageReceived = ({ message }: MessageType) => {
           className="w-[28px] h-[28px] rounded-full object-cover "
         />
         <div
-          className="flex items-center text-labels bg-[#e6ecf0] text-[#14171a]
+          className="text-labels bg-[#e6ecf0] text-[#14171a]
            rounded-[20px] py-[6px] px-[10px] w-fit max-w-[240px] min-h-[30px] break-words fade-in-text"
         >
           <span>{message}</span>
